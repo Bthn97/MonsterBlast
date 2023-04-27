@@ -27,4 +27,25 @@ public static class BoardUtilities
 
         return neighbors;
     }
+
+    public static void SetBlockMatch(Block[,] board,bool isMatched)
+    {
+        var x = board.GetLength(0);
+        var y = board.GetLength(1);
+
+        for (int i = 0; i < x; i++)
+        {
+            for (int m = 0; m < y; m++)
+            {
+                board[i, m].IsMatched = isMatched;
+            }
+        }
+
+    }
+
+    public static void SetBlockMatch(List<Block> blocks, bool isMatched)
+    {
+        foreach (var item in blocks)
+            item.IsMatched = isMatched;
+    }
 }

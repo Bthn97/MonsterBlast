@@ -26,6 +26,10 @@ public class GameManager : MonoBehaviour
             AddScore(matchingBlocks.Count * 10);
             _board.RemoveAndReplaceBlocks(matchingBlocks);
         }
+        else
+        {
+            BoardUtilities.SetBlockMatch(matchingBlocks, false);
+        }
     }
 
     private void AddScore(int points)

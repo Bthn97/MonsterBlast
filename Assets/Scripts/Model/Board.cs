@@ -19,7 +19,6 @@ public class Board : MonoBehaviour
     private Monster _emptyMonster;
 
     private Block[,] _blocks;
-    private Block[,] _bufferBlocks;
     private bool isBoardProcessing = false;
     public static event Action OnBoardUpdated;
 
@@ -36,17 +35,7 @@ public class Board : MonoBehaviour
     private void GetBlocks(Block[,] createdBlocks)
     {
         _blocks = createdBlocks;
-        GenerateMonsters();
-        _bufferBlocks = new Block[_rows, _columns];
-        for (int x = 0; x < _columns; x++)
-        {
-            for (int y = 0; y < _rows; y++)
-            {
-                _bufferBlocks[x, y] = _blocks[x, y];
-            }
-        }
-        
-
+        GenerateMonsters();  
     }
 
     private void GenerateMonsters()
@@ -115,17 +104,13 @@ public class Board : MonoBehaviour
             {
                 if (_blocks[x, y] != null && _blocks[x, y].IsMatched)
                 {
-                    _bufferBlocks[x, y] = null;
                     _blocks[x, y].RemoveBlock();
                     yield return new WaitForSeconds(0.075f);
-                }
-                else
-                {
-                    _bufferBlocks[x, y] = _blocks[x, y];
                 }
             }
         }
         yield return null;
+        BoardUtilities.SetBlockMatch(_blocks, false);
     
     }
 
