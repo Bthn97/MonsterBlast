@@ -9,36 +9,42 @@ public class Board : MonoBehaviour
     private int _columns = 8;
 
     [SerializeField]
-    private Block _blockPrefab;
+    private float _blockSize = 5f;
+
     [SerializeField]
     private List<Monster> _monsterTypes;
 
     private Block[,] _blocks;
 
-    private void Start()
+    private void OnEnable()
     {
-        InitializeBoard();
+        BlockSpawner.OnBlocksCreated += GetBlocks;
+    }
+    private void OnDisable()
+    {
+        BlockSpawner.OnBlocksCreated -= GetBlocks;
     }
 
-    private void InitializeBoard()
+    private void GetBlocks(Block[,] createdBlocks) => _blocks = createdBlocks;
+
+    public Block GetBlockAtWorldPosition(Vector2 worldPosition)
     {
-        _blocks = new Block[_rows, _columns];
+        int x = Mathf.FloorToInt(worldPosition.x / _blockSize);
+        int y = Mathf.FloorToInt(worldPosition.y / _blockSize);
 
-        for (int i = 0; i < _rows; i++)
-        {
-            for (int j = 0; j < _columns; j++)
-            {
-                Vector2Int gridPosition = new Vector2Int(i, j);
+        if (x < 0 || x >= _columns || y < 0 || y >= _rows) return null;
 
-                var newBlockGO = ObjectPool.Instance.SpawnFromPool("Block", GetWorldPosition(gridPosition), Quaternion.identity);
-                newBlockGO.transform.parent = transform;
-                var newBlock = newBlockGO.GetComponent<Block>();
+        return _blocks[x, y];
+    }
 
-                newBlock.GridPosition = gridPosition;
-                newBlock.Monster = GetRandomMonster();
-                _blocks[i, j] = newBlock;
-            }
-        }
+    public List<Block> GetMatchingNeighbors(Block block)
+    {
+        return null;
+    }
+
+    public void RemoveAndReplaceBlocks(List<Block> matchingBlocks)
+    {
+        
     }
 
     private Monster GetRandomMonster()
