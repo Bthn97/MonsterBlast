@@ -15,24 +15,17 @@ public class GameManager : MonoBehaviour
     public int Score { get; private set; }
 
 
-    public void HandleBlockSelection(Vector2 worldPosition)
+    public void HandleBlockSelection(Block _selectedBlock)
     {       
-        Block selectedBlock = _board.GetBlockAtWorldPosition(worldPosition);
-        if (selectedBlock == null) return;
+        if (_selectedBlock == null) return;
 
-        List<Block> matchingBlocks = _board.GetMatchingNeighbors(selectedBlock);
+        List<Block> matchingBlocks = _board.GetMatchingNeighbors(_selectedBlock);
 
-        // Eşleşme sağlanırsa, puan ekleyin ve blokları yok edin
-        if (matchingBlocks.Count >= 2) // 2 veya daha fazla komşu blok eşleşirse
+        if (matchingBlocks.Count >= 2)
         {
             AddScore(matchingBlocks.Count * 10);
             _board.RemoveAndReplaceBlocks(matchingBlocks);
         }
-    }
-
-    public void SwapBlocks(Block block1, Block block2)
-    {
-        // Check for matches!!
     }
 
     private void AddScore(int points)

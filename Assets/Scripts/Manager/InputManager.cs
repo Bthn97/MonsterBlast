@@ -16,9 +16,21 @@ public class InputManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Vector2 worldPosition = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
-            ICommand selectBlockCommand = new SelectBlockCommand(_gameManager, worldPosition);
-            selectBlockCommand.Execute();
+            Vector3 mousePos = Input.mousePosition;
+            Ray ray = _mainCamera.ScreenPointToRay(mousePos);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit, 1000f))
+            {
+                if (hit.collider != null)
+                {
+                    if (hit.transform.TryGetComponent(out Block block))
+                    {
+                        ICommand selectBlockCommand = new SelectBlockCommand(_gameManager, block);
+                        selectBlockCommand.Execute();
+                    }
+                }
+            }   
         }
     }
 }

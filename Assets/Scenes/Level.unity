@@ -153,14 +153,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab473346b64c742c28ded3c008dcacfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rows: 8
-  _columns: 8
+  _removeAnimDuration: 0.5
   _blockSize: 5
   _monsterTypes:
   - {fileID: 11400000, guid: 9e7108b93bcc44423b6eac208b99eeb7, type: 2}
   - {fileID: 11400000, guid: 955da5eb8860b453faf8b2c58a1f64cc, type: 2}
   - {fileID: 11400000, guid: 33ec4969d919549f6859032e6389f261, type: 2}
   - {fileID: 11400000, guid: 2c1f571349a5d479fa9f5b469ae5d6b7, type: 2}
+  _emptyMonster: {fileID: 0}
 --- !u!4 &250626990
 Transform:
   m_ObjectHideFlags: 0
@@ -188,8 +188,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19136acbc150e4496b1ac604515bb47b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  column: 8
-  row: 8
+  column: 6
+  row: 6
   objectZ: 10
 --- !u!1 &259412335
 GameObject:
@@ -601,8 +601,10 @@ GameObject:
   - component: {fileID: 692866542}
   - component: {fileID: 692866541}
   - component: {fileID: 692866540}
+  - component: {fileID: 692866545}
+  - component: {fileID: 692866544}
   m_Layer: 5
-  m_Name: MainCanvas
+  m_Name: GameCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -690,6 +692,32 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &692866544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 692866539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75294a6b2e6e74f4a9ac2e476e847dfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scoreText: {fileID: 324020706}
+--- !u!114 &692866545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 692866539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80340150326f94bfa8ad87ee4bc0d46d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _uiView: {fileID: 692866544}
 --- !u!1 &786075234
 GameObject:
   m_ObjectHideFlags: 0
@@ -782,7 +810,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a30e5d91e71b04f9cbc1a5a3fa80c0e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameManager: {fileID: 0}
+  _gameManager: {fileID: 1703068534}
 --- !u!1 &1276713865
 GameObject:
   m_ObjectHideFlags: 0
@@ -895,6 +923,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3f94020445264cc9bc892eaf7aa65a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _board: {fileID: 0}
+  _board: {fileID: 250626989}
   _inputManager: {fileID: 844291949}
-  _uiController: {fileID: 0}
+  _uiController: {fileID: 692866545}
