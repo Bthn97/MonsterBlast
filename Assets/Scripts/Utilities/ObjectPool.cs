@@ -9,8 +9,10 @@ public class ObjectPool : Singleton<ObjectPool>
     public List<Pool> pools = new List<Pool>();
     public Dictionary<string, List<GameObject>> poolDictionary = new Dictionary<string, List<GameObject>>();
 
-    public void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         foreach (Pool pool in pools)
         {
             List<GameObject> objectPool = new List<GameObject>();

@@ -8,13 +8,9 @@ public class Board : MonoBehaviour
 {
     private int _rows = 8;
     private int _columns = 8;
-    private int _minMatches = 3;
 
     [SerializeField]
     private float _removeAnimDuration = 0.5f;
-
-    [SerializeField]
-    private float _blockSize = 5f;
 
     [SerializeField]
     private List<Monster> _monsterTypes;
@@ -77,6 +73,7 @@ public class Board : MonoBehaviour
 
         visited.Add(block);
         block.JuiceBlock();
+        block.IsMatched = true;
 
         List<Block> matchingNeighbors = new List<Block>();
         List<Block> neighbors = BoardUtilities.GetNeighbors(_blocks, block, _rows, _columns);
@@ -86,11 +83,20 @@ public class Board : MonoBehaviour
             if (!visited.Contains(neighbor) && neighbor.Monster.MonsterName == block.Monster.MonsterName)
             {
                 matchingNeighbors.Add(neighbor);
+                neighbor.IsMatched = true;
                 neighbor.JuiceBlock();
-                Debug.LogFormat("grid {0}", neighbor.Monster.MonsterName);
-                matchingNeighbors.AddRange(GetMatchingNeighbors(neighbor, visited));
+
+                foreach (var item in GetMatchingNeighbors(neighbor, visited))
+                {
+                    if (!matchingNeighbors.Contains(item))
+                    {
+                        matchingNeighbors.Add(item);
+                    }
+                }
+                //matchingNeighbors.AddRange(GetMatchingNeighbors(neighbor, visited));
             }
         }
+        matchingNeighbors.Add(block);
 
         return matchingNeighbors;
     }
@@ -102,7 +108,7 @@ public class Board : MonoBehaviour
     }
 
     private IEnumerator RemoveAndReplace()
-    {        
+    {       
         for (int x = 0; x < _columns; x++)
         {
             for (int y = 0; y < _rows; y++)
@@ -111,6 +117,7 @@ public class Board : MonoBehaviour
                 {
                     _bufferBlocks[x, y] = null;
                     _blocks[x, y].RemoveBlock();
+                    yield return new WaitForSeconds(0.075f);
                 }
                 else
                 {
@@ -118,40 +125,8 @@ public class Board : MonoBehaviour
                 }
             }
         }
-
-        for (int x = 0; x < _columns; x++)
-        {
-            for (int y = 0; y < _rows; y++)
-            {
-                if (_bufferBlocks[x, y] == null)
-                {
-                    for (int yAbove = y + 1; yAbove < _rows; yAbove++)
-                    {
-                        if (_bufferBlocks[x, yAbove] != null)
-                        {
-                            Vector3 targetPosition = new Vector3(x, y, 0);
-                            _bufferBlocks[x, yAbove].MoveBlock(targetPosition);
-                            _bufferBlocks[x, y] = _bufferBlocks[x, yAbove];
-                            _bufferBlocks[x, yAbove] = null;
-
-                            _bufferBlocks[x, y].RemoveBlock();
-
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-
-        yield return new WaitForSeconds(_removeAnimDuration);
-
-        for (int x = 0; x < _columns; x++)
-        {
-            for (int y = 0; y < _rows; y++)
-            {
-                _blocks[x, y] = _bufferBlocks[x, y];
-            }
-        }     
+        yield return null;
+    
     }
 
     private Monster GetRandomMonster()

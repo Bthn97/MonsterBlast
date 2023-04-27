@@ -31,7 +31,7 @@ public class Block : MonoBehaviour
 
     public void JuiceBlock()
     {
-        _monsterSprite.transform.DOShakeScale(0.5f,0.5f,1,10);
+        _monsterSprite.transform.DOShakeScale(0.2f,0.5f,1,10);
     }
 
     private void UpdateAppearance(bool isAnimated = true)

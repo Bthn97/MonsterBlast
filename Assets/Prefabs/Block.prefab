@@ -106,6 +106,7 @@ MonoBehaviour:
   _moveAnimTime: 0.75
   _moveAnimDistance: 2
   _moveAnimEase: 18
+  IsMatched: 0
 --- !u!331 &7473303585553514489
 SpriteMask:
   m_ObjectHideFlags: 0

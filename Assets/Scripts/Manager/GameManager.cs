@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
 
         List<Block> matchingBlocks = _board.GetMatchingNeighbors(_selectedBlock);
 
-        if (matchingBlocks.Count >= 2)
+        if (matchingBlocks.Count >= 3)
         {
             AddScore(matchingBlocks.Count * 10);
             _board.RemoveAndReplaceBlocks(matchingBlocks);
