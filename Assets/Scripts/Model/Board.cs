@@ -25,7 +25,27 @@ public class Board : MonoBehaviour
         BlockSpawner.OnBlocksCreated -= GetBlocks;
     }
 
-    private void GetBlocks(Block[,] createdBlocks) => _blocks = createdBlocks;
+    private void GetBlocks(Block[,] createdBlocks)
+    {
+        _blocks = createdBlocks;
+        GenerateMonsters();
+
+    }
+
+    private void GenerateMonsters()
+    {
+        var width = _blocks.GetLength(0);
+        var height = _blocks.GetLength(1);
+
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                _blocks[x, y].GridPosition = new Vector2Int(x, y);
+                _blocks[x, y].Monster = GetRandomMonster();
+            }
+        }
+    }
 
     public Block GetBlockAtWorldPosition(Vector2 worldPosition)
     {

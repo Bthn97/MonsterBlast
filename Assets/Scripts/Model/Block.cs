@@ -1,10 +1,12 @@
-using System.Threading;
 using UnityEngine;
 
 public class Block : MonoBehaviour
 {
     [SerializeField]
     private Monster _monster;
+
+    [SerializeField]
+    private SpriteRenderer _monsterSprite;
 
     public Monster Monster
     {
@@ -22,7 +24,7 @@ public class Block : MonoBehaviour
     {
         if (_monster != null)
         {
-            // Update block appearance based on the assigned monster (e.g. change sprite, color, etc.)
+            _monsterSprite.sprite = _monster.MonsterSprite;
         }
     }
 }
