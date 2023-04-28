@@ -37,8 +37,5 @@ The following design patterns are implemented in this project to improve code or
 
 Pull requests and bug reports are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-## License
-
-[MIT](LICENSE)
 
  
