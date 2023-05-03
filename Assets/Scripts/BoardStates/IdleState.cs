@@ -1,18 +1,22 @@
 using UnityEngine;
-using System;
 
-public class InputManager : MonoBehaviour
+public class IdleState : IBoardState
 {
-    [SerializeField]
-    private GameManager _gameManager;
+    private BoardStateManager _stateManager;
     private Camera _mainCamera;
 
-    private void Start()
+    public IdleState(BoardStateManager stateManager)
     {
+        _stateManager = stateManager;
+    }
+
+    public void EnterState()
+    {
+        Debug.LogFormat("Entered {0}", "Idle State");
         _mainCamera = Camera.main;
     }
-    /*
-    private void Update()
+
+    public void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
@@ -26,12 +30,17 @@ public class InputManager : MonoBehaviour
                 {
                     if (hit.transform.TryGetComponent(out Block block))
                     {
-                        ICommand selectBlockCommand = new SelectBlockCommand(_gameManager, block);
+                        ICommand selectBlockCommand = new SelectBlockCommand(_stateManager, block);
                         selectBlockCommand.Execute();
                     }
                 }
-            }   
+            }
         }
     }
-    */
+
+    public void ExitState()
+    {
+       
+    }
 }
+

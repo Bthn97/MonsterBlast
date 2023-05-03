@@ -1,36 +1,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
     [SerializeField]
     private Board _board;
 
     [SerializeField]
-    private InputManager _inputManager;
-
-    [SerializeField]
     private UIController _uiController;
 
     public int Score { get; private set; }
-
-
-    public void HandleBlockSelection(Block _selectedBlock)
-    {       
-        if (_selectedBlock == null) return;
-
-        List<Block> matchingBlocks = _board.GetMatchingNeighbors(_selectedBlock);
-
-        if (matchingBlocks.Count >= 3)
-        {
-            AddScore(matchingBlocks.Count * 10);
-            _board.RemoveAndReplaceBlocks(matchingBlocks);
-        }
-        else
-        {
-            BoardUtilities.SetBlockMatch(matchingBlocks, false);
-        }
-    }
 
     private void AddScore(int points)
     {

@@ -15,14 +15,18 @@ public class BlockSpawner : MonoBehaviour
     public static event Action<Block[,]> OnBlocksCreated;
 
 
-    private void Start()
+    private void OnEnable()
     {
-        mainCam = Camera.main;
-        CreateSlots();
+        InitState.OnBoardInit += CreateSlots;
+    }
+    private void OnDisable()
+    {
+        InitState.OnBoardInit -= CreateSlots;
     }
 
     public void CreateSlots()
     {
+        mainCam = Camera.main;
         var _blocks = new Block[row, column];
 
         var screenHeight = mainCam.pixelHeight;

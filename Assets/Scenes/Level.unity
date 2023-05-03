@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 250626990}
   - component: {fileID: 250626989}
   - component: {fileID: 250626991}
+  - component: {fileID: 250626992}
   m_Layer: 0
   m_Name: Board
   m_TagString: Untagged
@@ -154,13 +155,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _removeAnimDuration: 0.5
-  _blockSize: 5
   _monsterTypes:
   - {fileID: 11400000, guid: 9e7108b93bcc44423b6eac208b99eeb7, type: 2}
   - {fileID: 11400000, guid: 955da5eb8860b453faf8b2c58a1f64cc, type: 2}
   - {fileID: 11400000, guid: 33ec4969d919549f6859032e6389f261, type: 2}
   - {fileID: 11400000, guid: 2c1f571349a5d479fa9f5b469ae5d6b7, type: 2}
-  _emptyMonster: {fileID: 0}
+  _emptyMonster: {fileID: 11400000, guid: 6f6aef4e86646408cbb91b1244c32163, type: 2}
 --- !u!4 &250626990
 Transform:
   m_ObjectHideFlags: 0
@@ -191,6 +191,19 @@ MonoBehaviour:
   column: 6
   row: 6
   objectZ: 10
+--- !u!114 &250626992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 250626988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0724133a9a03d4a38b3fccc43710ec0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BoardScript: {fileID: 250626989}
 --- !u!1 &259412335
 GameObject:
   m_ObjectHideFlags: 0
@@ -221,7 +234,6 @@ Transform:
   m_Children:
   - {fileID: 786075235}
   - {fileID: 1703068533}
-  - {fileID: 844291948}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -766,51 +778,6 @@ MonoBehaviour:
   - tag: Block
     prefab: {fileID: 3183153683628676675, guid: 6c580dea92fcb42ea8b227dde771dd16, type: 3}
     size: 64
---- !u!1 &844291947
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 844291948}
-  - component: {fileID: 844291949}
-  m_Layer: 0
-  m_Name: InputManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &844291948
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 844291947}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 259412336}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &844291949
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 844291947}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a30e5d91e71b04f9cbc1a5a3fa80c0e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _gameManager: {fileID: 1703068534}
 --- !u!1 &1276713865
 GameObject:
   m_ObjectHideFlags: 0
@@ -924,5 +891,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _board: {fileID: 250626989}
-  _inputManager: {fileID: 844291949}
   _uiController: {fileID: 692866545}
